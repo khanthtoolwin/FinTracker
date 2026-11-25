@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --bg-paper: #faf9f6;
+  --surface-sheet: #ffffff;
+  --surface-muted: #f4f2ed;
+  --ink-primary: #18181b;
+  --ink-secondary: #57534e;
+  --ink-muted: #78716c;
+  --border-rule: #e7e5e0;
+  --accent-forest: #166534;
+  --accent-forest-hover: #14532d;
+  --accent-forest-soft: #f0fdf4;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: var(--bg-paper);
+    color: var(--ink-primary);
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
+  }
+
+  .font-mono-tabular {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.notebook-ruled {
+  background-color: var(--surface-sheet);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 43px,
+    rgba(24, 24, 27, 0.045) 43px,
+    rgba(24, 24, 27, 0.045) 44px
+  );
+}
+
+.paper-canvas {
+  background-color: var(--bg-paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

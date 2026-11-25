@@ -1,0 +1,6 @@
+{
+  "name": "FinTracker",
+  "description": "Archival notebook-style daily expense tracker with monthly Recharts analytics, live search and filtering, CSV export, and Supabase persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
