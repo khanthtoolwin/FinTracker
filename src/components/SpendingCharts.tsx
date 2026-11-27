@@ -52,14 +52,14 @@ function DailyTooltip({ active, payload, activeCurrency }: CustomTooltipProps) {
   }
 
   return (
-    <div className="rounded-md border border-[#E7E5E0] bg-white px-3 py-2 shadow-sm">
-      <p className="text-xs font-medium text-[#57534E]">
+    <div className="rounded-md border border-[#2E3944] bg-[#1A2129] px-3 py-2 shadow-lg">
+      <p className="text-xs font-medium text-[#94A3B8]">
         {formatLedgerDate(point.date)}
       </p>
-      <p className="mt-0.5 font-mono-tabular text-sm font-semibold text-[#18181B]">
+      <p className="mt-0.5 font-mono-tabular text-sm font-semibold text-[#F1F5F9]">
         {formatCurrency(point.amount, activeCurrency)}
       </p>
-      <p className="text-[11px] text-[#78716C]">
+      <p className="text-[11px] text-[#7C8896]">
         {point.count} {point.count === 1 ? 'entry' : 'entries'}
       </p>
     </div>
@@ -76,12 +76,12 @@ function CategoryTooltip({ active, payload, activeCurrency }: CustomTooltipProps
   }
 
   return (
-    <div className="rounded-md border border-[#E7E5E0] bg-white px-3 py-2 shadow-sm">
-      <p className="text-xs font-medium text-[#18181B]">{item.category}</p>
-      <p className="mt-0.5 font-mono-tabular text-sm font-semibold text-[#18181B]">
+    <div className="rounded-md border border-[#2E3944] bg-[#1A2129] px-3 py-2 shadow-lg">
+      <p className="text-xs font-medium text-[#F1F5F9]">{item.category}</p>
+      <p className="mt-0.5 font-mono-tabular text-sm font-semibold text-[#F1F5F9]">
         {formatCurrency(item.amount, activeCurrency)}
       </p>
-      <p className="text-[11px] text-[#78716C]">
+      <p className="text-[11px] text-[#7C8896]">
         {item.share.toFixed(1)}% · {item.count}{' '}
         {item.count === 1 ? 'entry' : 'entries'}
       </p>
@@ -106,13 +106,13 @@ export function SpendingCharts({
       aria-label="Monthly spending visualizations"
       className="grid grid-cols-1 lg:grid-cols-12 gap-6"
     >
-      <div className="lg:col-span-7 border border-[#E7E5E0] bg-white rounded-lg p-5 sm:p-6">
+      <div className="lg:col-span-7 border border-[#222A32] bg-[#13181D] rounded-lg p-5 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
           <div>
-            <h2 className="font-display text-lg font-semibold text-[#18181B]">
+            <h2 className="font-display text-lg font-semibold text-[#F1F5F9]">
               Daily Spending Rhythm
             </h2>
-            <p className="text-xs text-[#57534E] mt-0.5">
+            <p className="text-xs text-[#94A3B8] mt-0.5">
               Day-by-day totals across {getMonthLabel(activeMonth)}
             </p>
           </div>
@@ -120,15 +120,15 @@ export function SpendingCharts({
           <div
             role="group"
             aria-label="Chart view style"
-            className="inline-flex items-center rounded-md border border-[#E7E5E0] bg-[#FAF9F6] p-0.5"
+            className="inline-flex items-center rounded-md border border-[#222A32] bg-[#0B0E11] p-0.5"
           >
             <button
               type="button"
               onClick={() => setChartMode('bars')}
               className={`px-3 py-1.5 text-xs font-medium rounded transition-colors whitespace-nowrap ${
                 chartMode === 'bars'
-                  ? 'bg-white text-[#18181B] shadow-xs'
-                  : 'text-[#57534E] hover:text-[#18181B]'
+                  ? 'bg-[#1A2129] text-[#34D399] shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F1F5F9]'
               }`}
             >
               Daily Bars
@@ -138,8 +138,8 @@ export function SpendingCharts({
               onClick={() => setChartMode('trend')}
               className={`px-3 py-1.5 text-xs font-medium rounded transition-colors whitespace-nowrap ${
                 chartMode === 'trend'
-                  ? 'bg-white text-[#18181B] shadow-xs'
-                  : 'text-[#57534E] hover:text-[#18181B]'
+                  ? 'bg-[#1A2129] text-[#34D399] shadow-xs'
+                  : 'text-[#94A3B8] hover:text-[#F1F5F9]'
               }`}
             >
               Trend Line
@@ -150,18 +150,18 @@ export function SpendingCharts({
         {!hasAnyExpensesInMonth ? (
           <div
             style={{ height: chartHeight }}
-            className="flex flex-col items-center justify-center rounded-md border border-dashed border-[#E7E5E0] bg-[#FAF9F6]/60 px-6 text-center"
+            className="flex flex-col items-center justify-center rounded-md border border-dashed border-[#222A32] bg-[#0B0E11]/60 px-6 text-center"
           >
-            <p className="text-sm font-medium text-[#18181B]">
+            <p className="text-sm font-medium text-[#F1F5F9]">
               No spending recorded for {getMonthLabel(activeMonth)}
             </p>
-            <p className="mt-1 text-xs text-[#57534E] max-w-xs">
+            <p className="mt-1 text-xs text-[#94A3B8] max-w-xs">
               Add your first daily expense to plot your spending cadence across the month.
             </p>
             <button
               type="button"
               onClick={onLogFirstExpense}
-              className="mt-4 inline-flex items-center px-3.5 py-2 text-xs font-medium text-white bg-[#166534] rounded-md hover:bg-[#14532D] transition-colors"
+              className="mt-4 inline-flex items-center px-3.5 py-2 text-xs font-semibold text-[#042F21] bg-[#10B981] rounded-md hover:bg-[#34D399] transition-colors"
             >
               Log First Expense
             </button>
@@ -176,32 +176,32 @@ export function SpendingCharts({
                 >
                   <CartesianGrid
                     vertical={false}
-                    stroke="#E7E5E0"
+                    stroke="#222A32"
                     strokeDasharray="3 3"
                   />
                   <XAxis
                     dataKey="label"
                     tickLine={false}
-                    axisLine={{ stroke: '#E7E5E0' }}
-                    tick={{ fill: '#78716C', fontSize: 11 }}
+                    axisLine={{ stroke: '#222A32' }}
+                    tick={{ fill: '#7C8896', fontSize: 11 }}
                     interval={2}
                   />
                   <YAxis
                     width={activeCurrency === 'MMK' ? 76 : 58}
                     tickLine={false}
                     axisLine={false}
-                    tick={{ fill: '#78716C', fontSize: 11 }}
+                    tick={{ fill: '#7C8896', fontSize: 11 }}
                     tickFormatter={(val: number) =>
                       formatCompactCurrency(val, activeCurrency)
                     }
                   />
                   <Tooltip
-                    cursor={{ fill: 'rgba(22, 101, 52, 0.06)' }}
+                    cursor={{ fill: 'rgba(52, 211, 153, 0.08)' }}
                     content={<DailyTooltip activeCurrency={activeCurrency} />}
                   />
                   <Bar
                     dataKey="amount"
-                    fill="#166534"
+                    fill="#34D399"
                     radius={[3, 3, 0, 0]}
                     maxBarSize={18}
                   />
@@ -212,28 +212,28 @@ export function SpendingCharts({
                   margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
                 >
                   <defs>
-                    <linearGradient id="forestInkFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#166534" stopOpacity={0.22} />
-                      <stop offset="95%" stopColor="#166534" stopOpacity={0.01} />
+                    <linearGradient id="mintInkFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#34D399" stopOpacity={0.28} />
+                      <stop offset="95%" stopColor="#34D399" stopOpacity={0.01} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid
                     vertical={false}
-                    stroke="#E7E5E0"
+                    stroke="#222A32"
                     strokeDasharray="3 3"
                   />
                   <XAxis
                     dataKey="label"
                     tickLine={false}
-                    axisLine={{ stroke: '#E7E5E0' }}
-                    tick={{ fill: '#78716C', fontSize: 11 }}
+                    axisLine={{ stroke: '#222A32' }}
+                    tick={{ fill: '#7C8896', fontSize: 11 }}
                     interval={2}
                   />
                   <YAxis
                     width={activeCurrency === 'MMK' ? 76 : 58}
                     tickLine={false}
                     axisLine={false}
-                    tick={{ fill: '#78716C', fontSize: 11 }}
+                    tick={{ fill: '#7C8896', fontSize: 11 }}
                     tickFormatter={(val: number) =>
                       formatCompactCurrency(val, activeCurrency)
                     }
@@ -244,11 +244,16 @@ export function SpendingCharts({
                   <Area
                     type="monotone"
                     dataKey="amount"
-                    stroke="#166534"
+                    stroke="#34D399"
                     strokeWidth={2}
                     fillOpacity={1}
-                    fill="url(#forestInkFill)"
-                    activeDot={{ r: 4, fill: '#166534', stroke: '#FFFFFF', strokeWidth: 2 }}
+                    fill="url(#mintInkFill)"
+                    activeDot={{
+                      r: 4,
+                      fill: '#34D399',
+                      stroke: '#0B0E11',
+                      strokeWidth: 2,
+                    }}
                   />
                 </AreaChart>
               )}
@@ -257,12 +262,12 @@ export function SpendingCharts({
         )}
       </div>
 
-      <div className="lg:col-span-5 border border-[#E7E5E0] bg-white rounded-lg p-5 sm:p-6">
+      <div className="lg:col-span-5 border border-[#222A32] bg-[#13181D] rounded-lg p-5 sm:p-6">
         <div className="mb-5">
-          <h2 className="font-display text-lg font-semibold text-[#18181B]">
+          <h2 className="font-display text-lg font-semibold text-[#F1F5F9]">
             Category Breakdown
           </h2>
-          <p className="text-xs text-[#57534E] mt-0.5">
+          <p className="text-xs text-[#94A3B8] mt-0.5">
             Where your spending went in {getMonthLabel(activeMonth)}
           </p>
         </div>
@@ -270,15 +275,23 @@ export function SpendingCharts({
         {categoryBreakdown.length === 0 ? (
           <div
             style={{ height: chartHeight }}
-            className="flex items-center justify-center rounded-md border border-dashed border-[#E7E5E0] bg-[#FAF9F6]/60 px-6 text-center"
+            className="flex items-center justify-center rounded-md border border-dashed border-[#222A32] bg-[#0B0E11]/60 px-6 text-center"
           >
-            <p className="text-xs text-[#57534E]">
+            <p className="text-xs text-[#94A3B8]">
               Categories will rank automatically once entries are logged.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
-            <div style={{ width: '100%', height: Math.max(150, Math.min(chartHeight - 40, categoryBreakdown.length * 36 + 20)) }}>
+            <div
+              style={{
+                width: '100%',
+                height: Math.max(
+                  150,
+                  Math.min(chartHeight - 40, categoryBreakdown.length * 36 + 20)
+                ),
+              }}
+            >
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                   data={categoryBreakdown}
@@ -287,23 +300,20 @@ export function SpendingCharts({
                 >
                   <CartesianGrid
                     horizontal={false}
-                    stroke="#E7E5E0"
+                    stroke="#222A32"
                     strokeDasharray="3 3"
                   />
-                  <XAxis
-                    type="number"
-                    hide
-                  />
+                  <XAxis type="number" hide />
                   <YAxis
                     type="category"
                     dataKey="category"
                     width={116}
                     tickLine={false}
                     axisLine={false}
-                    tick={{ fill: '#18181B', fontSize: 12 }}
+                    tick={{ fill: '#E2E8F0', fontSize: 12 }}
                   />
                   <Tooltip
-                    cursor={{ fill: 'rgba(24, 24, 27, 0.03)' }}
+                    cursor={{ fill: 'rgba(255, 255, 255, 0.04)' }}
                     content={<CategoryTooltip activeCurrency={activeCurrency} />}
                   />
                   <Bar dataKey="amount" radius={[0, 3, 3, 0]} barSize={16}>
@@ -315,7 +325,7 @@ export function SpendingCharts({
               </ResponsiveContainer>
             </div>
 
-            <div className="border-t border-[#E7E5E0] pt-3 space-y-2">
+            <div className="border-t border-[#222A32] pt-3 space-y-2">
               {categoryBreakdown.slice(0, expanded ? 8 : 4).map((item) => (
                 <div
                   key={item.category}
@@ -327,13 +337,13 @@ export function SpendingCharts({
                       className="h-2.5 w-2.5 rounded-xs shrink-0"
                       style={{ backgroundColor: item.color }}
                     />
-                    <span className="text-[#18181B] font-medium truncate">
+                    <span className="text-[#F1F5F9] font-medium truncate">
                       {item.category}
                     </span>
                   </div>
                   <div className="flex items-center gap-3 shrink-0 font-mono-tabular">
-                    <span className="text-[#78716C]">{item.share.toFixed(0)}%</span>
-                    <span className="font-medium text-[#18181B]">
+                    <span className="text-[#7C8896]">{item.share.toFixed(0)}%</span>
+                    <span className="font-medium text-[#F1F5F9]">
                       {formatCurrency(item.amount, activeCurrency)}
                     </span>
                   </div>

@@ -215,14 +215,14 @@ export default function App() {
       const created = await createExpense(input, userId);
       setExpenses((prev) => [created, ...prev]);
       setActiveMonth(created.expenseDate.slice(0, 7));
-      showToast('Saved expense to ledger');
+      showToast('Saved expense to notebook');
     }
   }
 
   async function handleDeleteExpense(id: string) {
     await deleteExpense(id, userId);
     setExpenses((prev) => prev.filter((item) => item.id !== id));
-    showToast('Removed entry from ledger');
+    showToast('Removed entry from notebook');
   }
 
   async function handleSignOut() {
@@ -270,13 +270,13 @@ export default function App() {
   function handleClearLocalData() {
     clearLocalExpenses();
     setExpenses([]);
-    showToast('Cleared local browser ledger');
+    showToast('Cleared local browser data');
   }
 
   if (authChecking) {
     return (
-      <div className="min-h-screen bg-[#FAF9F6] flex items-center justify-center">
-        <p className="text-sm text-[#57534E]">Opening FinTracker notebook...</p>
+      <div className="min-h-screen bg-[#0B0E11] flex items-center justify-center">
+        <p className="text-sm text-[#94A3B8]">Opening FinTracker notebook...</p>
       </div>
     );
   }
@@ -305,7 +305,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-[#18181B] flex">
+    <div className="min-h-screen bg-[#0B0E11] text-[#F1F5F9] flex">
       <Sidebar
         activeSection={activeSection}
         onSelectSection={setActiveSection}
@@ -334,7 +334,7 @@ export default function App() {
           {loadError && (
             <div
               role="alert"
-              className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#FECACA] bg-[#FEF2F2] px-4 py-3 text-xs text-[#DC2626]"
+              className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#F87171]/30 bg-[#7F1D1D]/25 px-4 py-3 text-xs text-[#FCA5A5]"
             >
               <span className="font-medium">{loadError}</span>
               <button
@@ -510,7 +510,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-5 right-5 z-50 rounded-md border border-[#E7E5E0] bg-[#18181B] px-4 py-2.5 text-xs font-medium text-white shadow-lg"
+            className="fixed bottom-5 right-5 z-50 rounded-md border border-[#2E3944] bg-[#1A2129] px-4 py-2.5 text-xs font-medium text-[#F1F5F9] shadow-lg"
           >
             {toastMessage}
           </motion.div>

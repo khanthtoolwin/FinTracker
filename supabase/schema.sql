@@ -103,16 +103,23 @@ create policy "Users can delete own expenses"
   to authenticated
   using (auth.uid() = user_id);
 
--- Hardened & throttled email registration lookup for Forgot Password flow
-create table if not exists public.auth_email_lookup_attempts (
-  email_key text primary key,
+-- Hardened & per-IP throttled email registration lookup for Forgot Password flow
+-- Called exclusively by the check-email-registered Supabase Edge Function (service_role)
+drop function if exists public.check_email_registered(text);
+drop table if exists public.auth_email_lookup_attempts;
+
+create table if not exists public.auth_ip_lookup_attempts (
+  ip_hash text primary key,
   attempt_count integer not null default 1,
   window_started_at timestamptz not null default now()
 );
 
-alter table public.auth_email_lookup_attempts enable row level security;
+alter table public.auth_ip_lookup_attempts enable row level security;
 
-create or replace function public.check_email_registered(email_input text)
+create or replace function public.check_email_registered(
+  email_input text,
+  ip_hash_input text
+)
 returns jsonb
 language plpgsql
 security definer
@@ -120,10 +127,12 @@ set search_path = public, auth
 as $$
 declare
   v_email text;
+  v_ip_hash text;
   v_attempts integer;
   v_exists boolean;
 begin
   v_email := lower(trim(coalesce(email_input, '')));
+  v_ip_hash := trim(coalesce(ip_hash_input, ''));
 
   if char_length(v_email) < 3
      or char_length(v_email) > 254
@@ -135,23 +144,31 @@ begin
     );
   end if;
 
-  insert into public.auth_email_lookup_attempts (
-    email_key,
+  if char_length(v_ip_hash) < 16 or char_length(v_ip_hash) > 128 then
+    return jsonb_build_object(
+      'registered', false,
+      'rate_limited', true,
+      'invalid', false
+    );
+  end if;
+
+  insert into public.auth_ip_lookup_attempts (
+    ip_hash,
     attempt_count,
     window_started_at
   )
-  values (v_email, 1, now())
-  on conflict (email_key) do update
+  values (v_ip_hash, 1, now())
+  on conflict (ip_hash) do update
   set
     attempt_count = case
-      when public.auth_email_lookup_attempts.window_started_at < now() - interval '15 minutes'
+      when public.auth_ip_lookup_attempts.window_started_at < now() - interval '15 minutes'
         then 1
-      else least(public.auth_email_lookup_attempts.attempt_count + 1, 1000)
+      else least(public.auth_ip_lookup_attempts.attempt_count + 1, 1000)
     end,
     window_started_at = case
-      when public.auth_email_lookup_attempts.window_started_at < now() - interval '15 minutes'
+      when public.auth_ip_lookup_attempts.window_started_at < now() - interval '15 minutes'
         then now()
-      else public.auth_email_lookup_attempts.window_started_at
+      else public.auth_ip_lookup_attempts.window_started_at
     end
   returning attempt_count into v_attempts;
 
@@ -177,5 +194,5 @@ begin
 end;
 $$;
 
-revoke all on function public.check_email_registered(text) from public;
-grant execute on function public.check_email_registered(text) to anon, authenticated;
+revoke all on function public.check_email_registered(text, text) from public, anon, authenticated;
+grant execute on function public.check_email_registered(text, text) to service_role;

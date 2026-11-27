@@ -1,24 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --bg-paper: #faf9f6;
-  --surface-sheet: #ffffff;
-  --surface-muted: #f4f2ed;
-  --ink-primary: #18181b;
-  --ink-secondary: #57534e;
-  --ink-muted: #78716c;
-  --border-rule: #e7e5e0;
-  --accent-forest: #166534;
-  --accent-forest-hover: #14532d;
-  --accent-forest-soft: #f0fdf4;
+  --bg-canvas: #0b0e11;
+  --bg-subtle: #0f1419;
+  --surface-card: #13181d;
+  --surface-elevated: #1a2129;
+  --ink-primary: #f1f5f9;
+  --ink-secondary: #94a3b8;
+  --ink-muted: #7c8896;
+  --border-rule: #222a32;
+  --border-strong: #2e3944;
+  --accent-mint: #34d399;
+  --accent-mint-solid: #10b981;
+  --accent-mint-hover: #059669;
+  --accent-mint-ink: #042f21;
 }
 
 @layer base {
   html,
   body {
-    background-color: var(--bg-paper);
+    color-scheme: dark;
+    background-color: var(--bg-canvas);
     color: var(--ink-primary);
     font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -40,18 +45,18 @@
 }
 
 .notebook-ruled {
-  background-color: var(--surface-sheet);
+  background-color: var(--surface-card);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent,
     transparent 43px,
-    rgba(24, 24, 27, 0.045) 43px,
-    rgba(24, 24, 27, 0.045) 44px
+    rgba(255, 255, 255, 0.03) 43px,
+    rgba(255, 255, 255, 0.03) 44px
   );
 }
 
 .paper-canvas {
-  background-color: var(--bg-paper);
+  background-color: var(--bg-canvas);
 }
 
 @media (prefers-reduced-motion: reduce) {

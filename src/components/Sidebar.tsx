@@ -7,6 +7,7 @@ import {
   X,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { FinTrackerLogo } from './FinTrackerLogo';
 import type { NavSection } from '../types/expense';
 
 interface SidebarProps {
@@ -25,7 +26,7 @@ const NAV_ITEMS: Array<{
   icon: typeof LayoutDashboard;
 }> = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-  { id: 'ledger', label: 'Daily Ledger', icon: BookOpen },
+  { id: 'ledger', label: 'Daily Expenses', icon: BookOpen },
   { id: 'analytics', label: 'Monthly Analytics', icon: BarChart3 },
   { id: 'setup', label: 'Setup & Export', icon: Settings2 },
 ];
@@ -39,7 +40,7 @@ function SidebarContent({
   onSignOut,
 }: Omit<SidebarProps, 'mobileOpen'>) {
   return (
-    <div className="flex h-full flex-col justify-between bg-[#FAF9F6] px-4 py-6">
+    <div className="flex h-full flex-col justify-between bg-[#0F1419] px-4 py-6">
       <div>
         <div className="flex items-center justify-between px-2 pb-6">
           <button
@@ -48,15 +49,16 @@ function SidebarContent({
               onSelectSection('overview');
               onCloseMobile();
             }}
-            className="font-display text-2xl font-semibold tracking-tight text-[#18181B] whitespace-nowrap shrink-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
+            className="whitespace-nowrap shrink-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399] rounded"
+            aria-label="FinTracker home"
           >
-            FinTracker
+            <FinTrackerLogo size="sm" />
           </button>
           <button
             type="button"
             onClick={onCloseMobile}
             aria-label="Close navigation menu"
-            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-[#57534E] hover:bg-[#EFECE6] hover:text-[#18181B] transition-colors"
+            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-[#94A3B8] hover:bg-[#1A2129] hover:text-[#F1F5F9] transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -74,10 +76,10 @@ function SidebarContent({
                   onSelectSection(item.id);
                   onCloseMobile();
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-md transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399] ${
                   isActive
-                    ? 'bg-[#EFECE6] text-[#166534] font-semibold'
-                    : 'text-[#57534E] hover:bg-[#F4F2ED] hover:text-[#18181B]'
+                    ? 'bg-[#1A2129] text-[#34D399] font-semibold'
+                    : 'text-[#94A3B8] hover:bg-[#13181D] hover:text-[#F1F5F9]'
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -88,13 +90,13 @@ function SidebarContent({
         </nav>
       </div>
 
-      <div className="border-t border-[#E7E5E0] pt-4 px-2">
+      <div className="border-t border-[#222A32] pt-4 px-2">
         {isSupabaseConfigured && userEmail ? (
           <div className="space-y-2.5">
             <div>
-              <p className="text-xs font-medium text-[#78716C]">Signed in</p>
+              <p className="text-xs font-medium text-[#7C8896]">Signed in</p>
               <p
-                className="text-xs font-medium text-[#18181B] truncate mt-0.5"
+                className="text-xs font-medium text-[#F1F5F9] truncate mt-0.5"
                 title={userEmail}
               >
                 {userEmail}
@@ -103,7 +105,7 @@ function SidebarContent({
             <button
               type="button"
               onClick={onSignOut}
-              className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-[#18181B] bg-white border border-[#E7E5E0] rounded-md hover:bg-[#F4F2ED] transition-colors whitespace-nowrap"
+              className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium text-[#F1F5F9] bg-[#13181D] border border-[#222A32] rounded-md hover:bg-[#1A2129] hover:border-[#2E3944] transition-colors whitespace-nowrap"
             >
               <LogOut className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Sign Out</span>
@@ -111,8 +113,8 @@ function SidebarContent({
           </div>
         ) : (
           <div className="space-y-2">
-            <p className="text-xs font-medium text-[#18181B]">Local Browser Mode</p>
-            <p className="text-xs text-[#57534E] leading-relaxed">
+            <p className="text-xs font-medium text-[#F1F5F9]">Local Browser Mode</p>
+            <p className="text-xs text-[#94A3B8] leading-relaxed">
               Entries are saved locally in this browser.
             </p>
             <button
@@ -121,7 +123,7 @@ function SidebarContent({
                 onSelectSection('setup');
                 onCloseMobile();
               }}
-              className="text-xs font-medium text-[#166534] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#166534] rounded"
+              className="text-xs font-medium text-[#34D399] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34D399] rounded"
             >
               Backups &amp; Storage
             </button>
@@ -143,7 +145,7 @@ export function Sidebar({
 }: SidebarProps) {
   return (
     <>
-      <aside className="hidden lg:block w-60 shrink-0 border-r border-[#E7E5E0] bg-[#FAF9F6] sticky top-0 h-screen">
+      <aside className="hidden lg:block w-60 shrink-0 border-r border-[#222A32] bg-[#0F1419] sticky top-0 h-screen">
         <SidebarContent
           activeSection={activeSection}
           onSelectSection={onSelectSection}
@@ -163,14 +165,14 @@ export function Sidebar({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.16 }}
               onClick={onCloseMobile}
-              className="fixed inset-0 bg-[#18181B]/30 backdrop-blur-[1px]"
+              className="fixed inset-0 bg-black/60 backdrop-blur-[2px]"
             />
             <motion.aside
               initial={{ x: -256 }}
               animate={{ x: 0 }}
               exit={{ x: -256 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-y-0 left-0 w-64 border-r border-[#E7E5E0] bg-[#FAF9F6] shadow-xl z-50"
+              className="fixed inset-y-0 left-0 w-64 border-r border-[#222A32] bg-[#0F1419] shadow-xl z-50"
             >
               <SidebarContent
                 activeSection={activeSection}

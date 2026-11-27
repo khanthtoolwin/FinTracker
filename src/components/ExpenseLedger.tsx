@@ -49,15 +49,15 @@ export function ExpenseLedger({
 
   return (
     <section
-      aria-label="Daily expense ledger"
-      className="border border-[#E7E5E0] bg-white rounded-lg overflow-hidden"
+      aria-label="Daily expense list"
+      className="border border-[#222A32] bg-[#13181D] rounded-lg overflow-hidden"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7E5E0] px-5 py-4 bg-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#222A32] px-5 py-4 bg-[#13181D]">
         <div>
-          <h2 className="font-display text-lg font-semibold text-[#18181B]">
-            {compactHeader ? 'Recent Notebook Entries' : 'Expense Ledger'}
+          <h2 className="font-display text-lg font-semibold text-[#F1F5F9]">
+            {compactHeader ? 'Recent Notebook Entries' : 'Expense List'}
           </h2>
-          <p className="text-xs text-[#57534E] mt-0.5">
+          <p className="text-xs text-[#94A3B8] mt-0.5">
             {getMonthLabel(activeMonth)} · Chronological transaction record
           </p>
         </div>
@@ -66,28 +66,28 @@ export function ExpenseLedger({
           <button
             type="button"
             onClick={onViewFullLedger}
-            className="text-xs font-medium text-[#166534] hover:underline whitespace-nowrap"
+            className="text-xs font-medium text-[#34D399] hover:underline whitespace-nowrap"
           >
-            Open Full Ledger
+            View All Expenses
           </button>
         )}
       </div>
 
       {loading ? (
-        <div className="divide-y divide-[#E7E5E0] bg-white">
+        <div className="divide-y divide-[#222A32] bg-[#13181D]">
           {[0, 1, 2, 3, 4].map((row) => (
             <div
               key={row}
               className="flex items-center justify-between gap-4 px-5 py-3.5 animate-pulse"
             >
               <div className="flex items-center gap-4 min-w-0 flex-1">
-                <div className="h-3.5 w-14 rounded bg-[#EFECE6]" />
+                <div className="h-3.5 w-14 rounded bg-[#1A2129]" />
                 <div className="space-y-1.5 flex-1 max-w-xs">
-                  <div className="h-4 w-44 rounded bg-[#EFECE6]" />
-                  <div className="h-3 w-28 rounded bg-[#F4F2ED]" />
+                  <div className="h-4 w-44 rounded bg-[#1A2129]" />
+                  <div className="h-3 w-28 rounded bg-[#1A2129]/70" />
                 </div>
               </div>
-              <div className="h-4 w-16 rounded bg-[#EFECE6]" />
+              <div className="h-4 w-16 rounded bg-[#1A2129]" />
             </div>
           ))}
         </div>
@@ -95,34 +95,34 @@ export function ExpenseLedger({
         <div className="notebook-ruled px-6 py-14 text-center">
           {isFiltered ? (
             <>
-              <p className="font-display text-lg font-semibold text-[#18181B]">
+              <p className="font-display text-lg font-semibold text-[#F1F5F9]">
                 No entries match your filters
               </p>
-              <p className="mt-1.5 text-sm text-[#57534E] max-w-md mx-auto">
+              <p className="mt-1.5 text-sm text-[#94A3B8] max-w-md mx-auto">
                 Try adjusting your search query, category filter, or date window.
               </p>
               <button
                 type="button"
                 onClick={onResetFilters}
-                className="mt-5 inline-flex items-center rounded-md border border-[#E7E5E0] bg-white px-4 py-2 text-xs font-medium text-[#18181B] hover:bg-[#F4F2ED] transition-colors"
+                className="mt-5 inline-flex items-center rounded-md border border-[#222A32] bg-[#1A2129] px-4 py-2 text-xs font-medium text-[#F1F5F9] hover:border-[#2E3944] hover:bg-[#222A32] transition-colors"
               >
                 Clear Filters
               </button>
             </>
           ) : (
             <>
-              <p className="font-display text-lg font-semibold text-[#18181B]">
+              <p className="font-display text-lg font-semibold text-[#F1F5F9]">
                 {hasAnyExpensesInWorkspace
                   ? `Blank page for ${getMonthLabel(activeMonth)}`
                   : 'Start your FinTracker notebook'}
               </p>
-              <p className="mt-1.5 text-sm text-[#57534E] max-w-md mx-auto">
+              <p className="mt-1.5 text-sm text-[#94A3B8] max-w-md mx-auto">
                 Record your daily coffee, groceries, transit, or bills. Each entry updates your monthly rhythm and category totals right away.
               </p>
               <button
                 type="button"
                 onClick={onLogFirstExpense}
-                className="mt-5 inline-flex items-center rounded-md bg-[#166534] px-4 py-2 text-xs font-medium text-white hover:bg-[#14532D] transition-colors"
+                className="mt-5 inline-flex items-center rounded-md bg-[#10B981] px-4 py-2 text-xs font-semibold text-[#042F21] hover:bg-[#34D399] transition-colors"
               >
                 Log First Expense
               </button>
@@ -133,7 +133,7 @@ export function ExpenseLedger({
         <div className="overflow-x-auto notebook-ruled">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-[#E7E5E0] bg-[#FAF9F6]/80 text-[11px] font-semibold text-[#57534E]">
+              <tr className="border-b border-[#222A32] bg-[#0F1419]/90 text-[11px] font-semibold text-[#94A3B8]">
                 <th className="py-2.5 pl-5 pr-3 w-24 whitespace-nowrap">Date</th>
                 <th className="py-2.5 px-3">Entry &amp; Category</th>
                 <th className="hidden md:table-cell py-2.5 px-3 w-36 whitespace-nowrap">
@@ -147,7 +147,7 @@ export function ExpenseLedger({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E7E5E0]/80">
+            <tbody className="divide-y divide-[#222A32]/80">
               <AnimatePresence initial={false}>
                 {expenses.map((expense) => {
                   const isConfirming = confirmDeleteId === expense.id;
@@ -162,9 +162,9 @@ export function ExpenseLedger({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                      className="group hover:bg-[#FAF9F6]/90 transition-colors"
+                      className="group hover:bg-[#1A2129]/60 transition-colors"
                     >
-                      <td className="py-3 pl-5 pr-3 align-top font-mono-tabular text-xs text-[#57534E] whitespace-nowrap">
+                      <td className="py-3 pl-5 pr-3 align-top font-mono-tabular text-xs text-[#94A3B8] whitespace-nowrap">
                         {formatLedgerDate(expense.expenseDate)}
                       </td>
                       <td className="py-3 px-3 align-top min-w-[200px]">
@@ -175,10 +175,10 @@ export function ExpenseLedger({
                             style={{ backgroundColor: accentColor }}
                           />
                           <div className="min-w-0">
-                            <p className="text-sm font-medium text-[#18181B] leading-snug">
+                            <p className="text-sm font-medium text-[#F1F5F9] leading-snug">
                               {expense.title}
                             </p>
-                            <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-[#57534E]">
+                            <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-[#94A3B8]">
                               <span>{expense.category}</span>
                               <span className="md:hidden" aria-hidden="true">
                                 ·
@@ -187,7 +187,7 @@ export function ExpenseLedger({
                               {expense.notes && (
                                 <>
                                   <span aria-hidden="true">·</span>
-                                  <span className="text-[#78716C] truncate max-w-sm">
+                                  <span className="text-[#7C8896] truncate max-w-sm">
                                     {expense.notes}
                                   </span>
                                 </>
@@ -196,10 +196,10 @@ export function ExpenseLedger({
                           </div>
                         </div>
                       </td>
-                      <td className="hidden md:table-cell py-3 px-3 align-top text-xs text-[#57534E] whitespace-nowrap">
+                      <td className="hidden md:table-cell py-3 px-3 align-top text-xs text-[#94A3B8] whitespace-nowrap">
                         {expense.paymentMethod}
                       </td>
-                      <td className="py-3 px-3 align-top text-right font-mono-tabular text-sm font-semibold text-[#18181B] whitespace-nowrap">
+                      <td className="py-3 px-3 align-top text-right font-mono-tabular text-sm font-semibold text-[#F1F5F9] whitespace-nowrap">
                         {formatCurrency(
                           convertAmount(
                             expense.amount,
@@ -224,7 +224,7 @@ export function ExpenseLedger({
                               type="button"
                               disabled={isDeleting}
                               onClick={() => setConfirmDeleteId(null)}
-                              className="px-2 py-1 text-[11px] font-medium text-[#57534E] hover:text-[#18181B]"
+                              className="px-2 py-1 text-[11px] font-medium text-[#94A3B8] hover:text-[#F1F5F9]"
                             >
                               Cancel
                             </button>
@@ -235,7 +235,7 @@ export function ExpenseLedger({
                               type="button"
                               onClick={() => onEdit(expense)}
                               aria-label={`Edit ${expense.title}`}
-                              className="inline-flex h-8 w-8 items-center justify-center rounded text-[#57534E] hover:bg-[#EFECE6] hover:text-[#18181B] transition-colors"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded text-[#94A3B8] hover:bg-[#1A2129] hover:text-[#F1F5F9] transition-colors"
                             >
                               <Pencil className="h-3.5 w-3.5" />
                             </button>
@@ -243,7 +243,7 @@ export function ExpenseLedger({
                               type="button"
                               onClick={() => setConfirmDeleteId(expense.id)}
                               aria-label={`Delete ${expense.title}`}
-                              className="inline-flex h-8 w-8 items-center justify-center rounded text-[#57534E] hover:bg-[#FEE2E2] hover:text-[#DC2626] transition-colors"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded text-[#94A3B8] hover:bg-[#7F1D1D]/40 hover:text-[#FCA5A5] transition-colors"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
                             </button>

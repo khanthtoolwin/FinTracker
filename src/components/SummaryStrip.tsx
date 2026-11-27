@@ -25,40 +25,40 @@ export function SummaryStrip({
 
   const deltaTone =
     summary.monthDeltaPercent === null
-      ? 'text-[#78716C]'
+      ? 'text-[#7C8896]'
       : summary.monthDeltaPercent > 10
-        ? 'text-[#B45309]'
+        ? 'text-[#FBBF24]'
         : summary.monthDeltaPercent < 0
-          ? 'text-[#166534]'
-          : 'text-[#57534E]';
+          ? 'text-[#34D399]'
+          : 'text-[#94A3B8]';
 
   return (
     <section
       aria-label="Monthly spending summary"
-      className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 border border-[#E7E5E0] bg-white rounded-lg divide-y sm:divide-y-0 sm:divide-x divide-[#E7E5E0]"
+      className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 border border-[#222A32] bg-[#13181D] rounded-lg divide-y sm:divide-y-0 sm:divide-x divide-[#222A32]"
     >
       <div className="p-5">
-        <p className="text-xs font-medium text-[#57534E]">Total Spent</p>
-        <p className="mt-2 font-display text-2xl sm:text-[28px] font-semibold tracking-tight text-[#18181B] tabular-nums">
+        <p className="text-xs font-medium text-[#94A3B8]">Total Spent</p>
+        <p className="mt-2 font-display text-2xl sm:text-[28px] font-semibold tracking-tight text-[#F1F5F9] tabular-nums">
           {formatCurrency(summary.totalSpent, activeCurrency)}
         </p>
         <p className={`mt-1.5 text-xs font-medium ${deltaTone}`}>{deltaText}</p>
       </div>
 
       <div className="p-5">
-        <p className="text-xs font-medium text-[#57534E]">Daily Average</p>
-        <p className="mt-2 font-mono-tabular text-2xl font-semibold tracking-tight text-[#18181B]">
+        <p className="text-xs font-medium text-[#94A3B8]">Daily Average</p>
+        <p className="mt-2 font-mono-tabular text-2xl font-semibold tracking-tight text-[#F1F5F9]">
           {formatCurrency(summary.dailyAverage, activeCurrency)}
         </p>
-        <p className="mt-1.5 text-xs text-[#78716C]">{getMonthLabel(activeMonth)}</p>
+        <p className="mt-1.5 text-xs text-[#7C8896]">{getMonthLabel(activeMonth)}</p>
       </div>
 
       <div className="p-5">
-        <p className="text-xs font-medium text-[#57534E]">Entries Logged</p>
-        <p className="mt-2 font-mono-tabular text-2xl font-semibold tracking-tight text-[#18181B]">
+        <p className="text-xs font-medium text-[#94A3B8]">Entries Logged</p>
+        <p className="mt-2 font-mono-tabular text-2xl font-semibold tracking-tight text-[#F1F5F9]">
           {summary.transactionCount}
         </p>
-        <p className="mt-1.5 text-xs text-[#78716C]">
+        <p className="mt-1.5 text-xs text-[#7C8896]">
           {isFiltered
             ? `Showing ${filteredCount} matching filter`
             : summary.transactionCount === 1
@@ -68,11 +68,11 @@ export function SummaryStrip({
       </div>
 
       <div className="p-5">
-        <p className="text-xs font-medium text-[#57534E]">Top Category</p>
-        <p className="mt-2 text-lg font-semibold tracking-tight text-[#18181B] truncate">
+        <p className="text-xs font-medium text-[#94A3B8]">Top Category</p>
+        <p className="mt-2 text-lg font-semibold tracking-tight text-[#F1F5F9] truncate">
           {summary.topCategory ?? 'None yet'}
         </p>
-        <p className="mt-2.5 text-xs font-mono-tabular text-[#78716C]">
+        <p className="mt-2.5 text-xs font-mono-tabular text-[#7C8896]">
           {summary.topCategory
             ? `${formatCurrency(summary.topCategoryAmount, activeCurrency)} this month`
             : 'Log an expense to compare'}

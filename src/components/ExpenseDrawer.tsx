@@ -128,7 +128,7 @@ export function ExpenseDrawer({
                 onClose();
               }
             }}
-            className="fixed inset-0 bg-[#18181B]/30 backdrop-blur-[1px]"
+            className="fixed inset-0 bg-black/65 backdrop-blur-[2px]"
           />
 
           <motion.div
@@ -139,20 +139,20 @@ export function ExpenseDrawer({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 flex h-full w-full max-w-md flex-col border-l border-[#E7E5E0] bg-[#FAF9F6] shadow-2xl"
+            className="relative z-10 flex h-full w-full max-w-md flex-col border-l border-[#222A32] bg-[#0F1419] shadow-2xl"
           >
-            <div className="flex items-center justify-between border-b border-[#E7E5E0] bg-white px-6 py-4">
+            <div className="flex items-center justify-between border-b border-[#222A32] bg-[#13181D] px-6 py-4">
               <div>
                 <h2
                   id="expense-drawer-title"
-                  className="font-display text-lg font-semibold text-[#18181B]"
+                  className="font-display text-lg font-semibold text-[#F1F5F9]"
                 >
                   {editingExpense ? 'Edit Notebook Entry' : 'Log New Expense'}
                 </h2>
-                <p className="text-xs text-[#57534E] mt-0.5">
+                <p className="text-xs text-[#94A3B8] mt-0.5">
                   {editingExpense
                     ? 'Update amount, date, or category details'
-                    : 'Record a daily transaction in your ledger'}
+                    : 'Record a daily expense in your notebook'}
                 </p>
               </div>
               <button
@@ -160,7 +160,7 @@ export function ExpenseDrawer({
                 onClick={onClose}
                 disabled={submitting}
                 aria-label="Close drawer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#57534E] hover:bg-[#F4F2ED] hover:text-[#18181B] transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#94A3B8] hover:bg-[#1A2129] hover:text-[#F1F5F9] transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -174,7 +174,7 @@ export function ExpenseDrawer({
                 {error && (
                   <div
                     role="alert"
-                    className="rounded-md border border-[#FECACA] bg-[#FEF2F2] px-3.5 py-2.5 text-xs font-medium text-[#DC2626]"
+                    className="rounded-md border border-[#F87171]/30 bg-[#7F1D1D]/25 px-3.5 py-2.5 text-xs font-medium text-[#FCA5A5]"
                   >
                     {error}
                   </div>
@@ -183,12 +183,12 @@ export function ExpenseDrawer({
                 <div>
                   <label
                     htmlFor="expense-amount"
-                    className="block text-xs font-medium text-[#57534E]"
+                    className="block text-xs font-medium text-[#94A3B8]"
                   >
                     Amount ({activeCurrency})
                   </label>
                   <div className="relative mt-1.5">
-                    <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono-tabular text-base font-medium text-[#78716C]">
+                    <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 font-mono-tabular text-base font-medium text-[#7C8896]">
                       {currencyMeta.symbol}
                     </span>
                     <input
@@ -201,9 +201,9 @@ export function ExpenseDrawer({
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       placeholder={currencyMeta.decimals === 0 ? '0' : '0.00'}
-                      className={`h-12 w-full rounded-md border border-[#E7E5E0] bg-white ${
+                      className={`h-12 w-full rounded-md border border-[#222A32] bg-[#13181D] ${
                         activeCurrency === 'MMK' ? 'pl-10' : 'pl-8'
-                      } pr-4 font-mono-tabular text-lg font-semibold text-[#18181B] placeholder:text-[#A8A29E] focus:border-[#166534] focus:outline-none focus:ring-2 focus:ring-[#166534]/15`}
+                      } pr-4 font-mono-tabular text-lg font-semibold text-[#F1F5F9] placeholder:text-[#7C8896] focus:border-[#34D399] focus:outline-none focus:ring-2 focus:ring-[#34D399]/20`}
                     />
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export function ExpenseDrawer({
                 <div>
                   <label
                     htmlFor="expense-title"
-                    className="block text-xs font-medium text-[#57534E]"
+                    className="block text-xs font-medium text-[#94A3B8]"
                   >
                     Description / Merchant
                   </label>
@@ -223,7 +223,7 @@ export function ExpenseDrawer({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g., Blue Bottle Coffee, Trader Joe's"
-                    className="mt-1.5 h-10 w-full rounded-md border border-[#E7E5E0] bg-white px-3.5 text-sm text-[#18181B] placeholder:text-[#A8A29E] focus:border-[#166534] focus:outline-none focus:ring-2 focus:ring-[#166534]/15"
+                    className="mt-1.5 h-10 w-full rounded-md border border-[#222A32] bg-[#13181D] px-3.5 text-sm text-[#F1F5F9] placeholder:text-[#7C8896] focus:border-[#34D399] focus:outline-none focus:ring-2 focus:ring-[#34D399]/20"
                   />
                 </div>
 
@@ -231,7 +231,7 @@ export function ExpenseDrawer({
                   <div>
                     <label
                       htmlFor="expense-category"
-                      className="block text-xs font-medium text-[#57534E]"
+                      className="block text-xs font-medium text-[#94A3B8]"
                     >
                       Category
                     </label>
@@ -241,7 +241,7 @@ export function ExpenseDrawer({
                       onChange={(e) =>
                         setCategory(e.target.value as ExpenseCategory)
                       }
-                      className="mt-1.5 h-10 w-full rounded-md border border-[#E7E5E0] bg-white px-3 text-sm text-[#18181B] focus:border-[#166534] focus:outline-none focus:ring-2 focus:ring-[#166534]/15"
+                      className="mt-1.5 h-10 w-full rounded-md border border-[#222A32] bg-[#13181D] px-3 text-sm text-[#F1F5F9] focus:border-[#34D399] focus:outline-none focus:ring-2 focus:ring-[#34D399]/20"
                     >
                       {EXPENSE_CATEGORIES.map((item) => (
                         <option key={item} value={item}>
@@ -254,7 +254,7 @@ export function ExpenseDrawer({
                   <div>
                     <label
                       htmlFor="expense-date"
-                      className="block text-xs font-medium text-[#57534E]"
+                      className="block text-xs font-medium text-[#94A3B8]"
                     >
                       Date
                     </label>
@@ -264,13 +264,13 @@ export function ExpenseDrawer({
                       required
                       value={expenseDate}
                       onChange={(e) => setExpenseDate(e.target.value)}
-                      className="mt-1.5 h-10 w-full rounded-md border border-[#E7E5E0] bg-white px-3 font-mono-tabular text-sm text-[#18181B] focus:border-[#166534] focus:outline-none focus:ring-2 focus:ring-[#166534]/15"
+                      className="mt-1.5 h-10 w-full rounded-md border border-[#222A32] bg-[#13181D] px-3 font-mono-tabular text-sm text-[#F1F5F9] focus:border-[#34D399] focus:outline-none focus:ring-2 focus:ring-[#34D399]/20"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <span className="block text-xs font-medium text-[#57534E]">
+                  <span className="block text-xs font-medium text-[#94A3B8]">
                     Payment Method
                   </span>
                   <div className="mt-1.5 grid grid-cols-2 gap-2">
@@ -281,8 +281,8 @@ export function ExpenseDrawer({
                         onClick={() => setPaymentMethod(method)}
                         className={`h-9 rounded-md border px-3 text-xs font-medium transition-colors whitespace-nowrap ${
                           paymentMethod === method
-                            ? 'border-[#166534] bg-[#F0FDF4] text-[#166534]'
-                            : 'border-[#E7E5E0] bg-white text-[#57534E] hover:text-[#18181B]'
+                            ? 'border-[#34D399]/60 bg-[#34D399]/10 text-[#34D399]'
+                            : 'border-[#222A32] bg-[#13181D] text-[#94A3B8] hover:border-[#2E3944] hover:text-[#F1F5F9]'
                         }`}
                       >
                         {method}
@@ -294,7 +294,7 @@ export function ExpenseDrawer({
                 <div>
                   <label
                     htmlFor="expense-notes"
-                    className="block text-xs font-medium text-[#57534E]"
+                    className="block text-xs font-medium text-[#94A3B8]"
                   >
                     Notes (optional)
                   </label>
@@ -305,24 +305,24 @@ export function ExpenseDrawer({
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="Add context, receipt details, or split notes..."
-                    className="mt-1.5 w-full rounded-md border border-[#E7E5E0] bg-white px-3.5 py-2.5 text-sm text-[#18181B] placeholder:text-[#A8A29E] focus:border-[#166534] focus:outline-none focus:ring-2 focus:ring-[#166534]/15"
+                    className="mt-1.5 w-full rounded-md border border-[#222A32] bg-[#13181D] px-3.5 py-2.5 text-sm text-[#F1F5F9] placeholder:text-[#7C8896] focus:border-[#34D399] focus:outline-none focus:ring-2 focus:ring-[#34D399]/20"
                   />
                 </div>
               </div>
 
-              <div className="mt-8 flex items-center justify-end gap-3 border-t border-[#E7E5E0] pt-4">
+              <div className="mt-8 flex items-center justify-end gap-3 border-t border-[#222A32] pt-4">
                 <button
                   type="button"
                   disabled={submitting}
                   onClick={onClose}
-                  className="h-10 rounded-md border border-[#E7E5E0] bg-white px-4 text-sm font-medium text-[#18181B] hover:bg-[#F4F2ED] transition-colors"
+                  className="h-10 rounded-md border border-[#222A32] bg-[#13181D] px-4 text-sm font-medium text-[#F1F5F9] hover:bg-[#1A2129] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="h-10 rounded-md bg-[#166534] px-5 text-sm font-medium text-white hover:bg-[#14532D] disabled:opacity-60 transition-colors"
+                  className="h-10 rounded-md bg-[#10B981] px-5 text-sm font-semibold text-[#042F21] hover:bg-[#34D399] disabled:opacity-60 transition-colors"
                 >
                   {submitting
                     ? 'Saving...'

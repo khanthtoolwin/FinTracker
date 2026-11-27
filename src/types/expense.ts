@@ -64,12 +64,12 @@ export interface FilterState {
 export type NavSection = 'overview' | 'ledger' | 'analytics' | 'setup';
 
 export const CATEGORY_CHART_COLORS: Record<ExpenseCategory, string> = {
-  'Food & Dining': '#166534',
-  Groceries: '#0F766E',
-  Transport: '#1D4ED8',
-  'Utilities & Bills': '#334155',
-  Shopping: '#B45309',
-  Health: '#047857',
-  Entertainment: '#6D28D9',
-  Other: '#57534E',
+  'Food & Dining': '#34D399',
+  Groceries: '#2DD4BF',
+  Transport: '#38BDF8',
+  'Utilities & Bills': '#94A3B8',
+  Shopping: '#FBBF24',
+  Health: '#6EE7B7',
+  Entertainment: '#A78BFA',
+  Other: '#64748B',
 };

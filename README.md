@@ -7,7 +7,7 @@
 - **Editorial Notebook Workspace**: Archival warm-paper canvas (`#FAF9F6`), subtle ruled ledger rows, single-elevation white sheets, `Fraunces` + `Plus Jakarta Sans` + `JetBrains Mono` (`tabular-nums`) typography, and smooth Framer Motion (`motion/react`) transitions.
 - **Authentication & Password Recovery (`Supabase Auth`)**:
   - Email/password **Sign In** and **Create Account** tabs with accessible show/hide password toggles and automatic field/state reset on tab switches.
-  - **Forgot Password** flow powered by a hardened, rate-limited `SECURITY DEFINER` Postgres function (`check_email_registered`, capped at 5 checks per email per 15 minutes): unregistered emails receive a one-click **Create Account with This Email** prompt, while registered emails receive a reset link that opens the **Set New Password** recovery screen (`PASSWORD_RECOVERY`).
+  - **Forgot Password** flow powered by a Supabase Edge Function (`check-email-registered`) and a `service_role`-only Postgres RPC (`check_email_registered`, capped at 5 lookups per IP every 15 minutes): unregistered emails receive a one-click **Create Account with This Email** prompt, while registered emails receive a reset link that opens the **Set New Password** recovery screen (`PASSWORD_RECOVERY`).
   - Clear error handling for Supabase's built-in 2-emails-per-hour default rate limit.
 - **Daily Expense CRUD**: Slide-over entry drawer with validation (amount, description, curated categories, date, payment method, optional notes), inline edit, and 2-step delete confirmation.
 - **Monthly Analytics (`Recharts`)**: Interactive **Daily Spending Rhythm** chart (toggleable between Daily Bars and Trend Line) and **Category Breakdown** horizontal bar chart with tabular share percentages.
@@ -19,7 +19,7 @@
 
 - **Frontend**: React, TypeScript, Vite, Tailwind CSS
 - **UI & Motion**: Lucide React icons, Framer Motion (`motion/react`), Recharts
-- **Backend & Auth**: Supabase (PostgreSQL, Email/Password Auth, Row-Level Security, `check_email_registered` RPC)
+- **Backend & Auth**: Supabase (PostgreSQL, Email/Password Auth, Row-Level Security, Edge Functions, `check_email_registered` RPC)
 - **Deployment & VCS**: Vercel (`vercel.json` SPA rewrites + security headers), Git & GitHub
 - **Documentation & Issue Tracking**:
   - [`docs/implementation_plan.md`](./docs/implementation_plan.md) — Initial Web MVP plan
@@ -39,11 +39,15 @@
    Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (or `SUPABASE_URL` and `SUPABASE_ANON_KEY`) from **Supabase Dashboard → Project Settings → API**.
 3. Initialize the database in **Supabase Dashboard → SQL Editor** by pasting and running [`supabase/schema.sql`](./supabase/schema.sql). This creates:
    - `public.expenses` (including `currency` support for `USD`, `THB`, and `MMK`) with `CHECK` constraints, indexes, `updated_at` trigger, and `auth.uid() = user_id` RLS policies.
-   - `public.auth_email_lookup_attempts` and `public.check_email_registered(email_input)` for throttled Forgot Password lookups.
-4. Configure **Supabase Dashboard → Authentication**:
+   - `public.auth_ip_lookup_attempts` and the `service_role`-only `public.check_email_registered(email_input, ip_hash_input)` RPC for per-IP throttled Forgot Password lookups.
+4. Deploy the Forgot Password Edge Function to your Supabase project (JWT verification is disabled in `supabase/config.toml` so logged-out users can invoke it before signing in):
+   ```bash
+   supabase functions deploy check-email-registered --no-verify-jwt
+   ```
+5. Configure **Supabase Dashboard → Authentication**:
    - Add your local URL (`http://localhost:3000`) and Vercel production URL under **URL Configuration → Redirect URLs** so password reset links resolve cleanly.
    - *(Recommended for production)* Configure a **Custom SMTP** provider under **Authentication → SMTP Settings** and adjust **Authentication → Rate Limits** beyond Supabase's default 2 emails/hour quota.
-5. Start the development server:
+6. Start the development server:
    ```bash
    npm run dev
    ```
